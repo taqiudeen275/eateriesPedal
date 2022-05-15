@@ -1,7 +1,7 @@
 from venv import create
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save,post_save
 from django.dispatch import receiver
-from .models import Food
+from .models import Food,FoodAverageRatings,FoodReview
 import random
 import string
 
@@ -18,3 +18,9 @@ def user_info_handler(sender,instance,*args, **kwargs):
     if instance:
         url = food_urls_generator(instance.name)
         instance.food_url = url
+
+@receiver(post_save, sender=FoodReview)
+def user_info_handler(sender,created, instance,*args, **kwargs):
+    if created:
+        food = instance.food
+        rate = instance.rate

@@ -52,3 +52,7 @@ class FoodReview(models.Model):
 
     def __str__(self):
         return f'{self.food} review'
+
+class FoodAverageRatings(models.Model):
+    food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name="averageRating")
+    rate = models.PositiveSmallIntegerField()

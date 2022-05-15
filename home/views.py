@@ -44,8 +44,8 @@ def foodView(request, food_url):
         'foods': foods,
         }
     if user.is_authenticated:
-        if user.vendor.exists:
-            vendor = VendorAcount.objects.get(user=user)
+        if user.vendor.exists():
+            vendor = get_object_or_404(VendorAcount, user=user)
             foodOwner = Food.objects.filter(vendor=vendor, food_url=food_url)
             if foodOwner:
                 context1 = {'foodowner': foodOwner}
