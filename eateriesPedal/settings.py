@@ -13,7 +13,7 @@ SECRET_KEY = 'django-insecure-6+l(skr#!#&bwf9i-#$j#%5t)y&s-)h#m0k%u&)p&oue8pg8k7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['eateriespedal.aveshost.com', '127.0.0.1:8000']
 
 
 # Application definition
