@@ -36,11 +36,20 @@ def menuView(request):
 def foodView(request, food_url):
     food = get_object_or_404(Food, food_url=food_url)
     foods = Food.objects.filter(vendor=food.vendor)
+    user = request.user
+   
     context={
         'title': food,
         'food': food,
         'foods': foods,
         }
+    if user.is_authenticated:
+        if user.vendor.exists:
+            vendor = VendorAcount.objects.get(user=user)
+            foodOwner = Food.objects.filter(vendor=vendor, food_url=food_url)
+            if foodOwner:
+                context1 = {'foodowner': foodOwner}
+                context.update(context1)
     return render(request, 'food.html', context)
 
 def vendorProfileView(request, vendorID):

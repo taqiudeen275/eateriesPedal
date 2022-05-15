@@ -30,3 +30,25 @@ class Food(models.Model):
     time_stamp = models.DateTimeField(auto_now=True, null=True, blank=True)
     def __str__(self):
         return self.name
+
+reiview_choice = [
+    (1, 'Trash'),
+    (2, 'Horible'),
+    (3, 'Terrible'),
+    (4, 'Manageable'),
+    (5, 'Good'),
+    (6, 'Better'),
+    (7, 'Tasty'),
+    (8, 'Yummy'),
+    (9, 'Awesome'),
+    (10, 'Superb'),
+]
+
+class FoodReview(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,related_name='myreview')
+    food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name='review')
+    rate = models.PositiveSmallIntegerField(choices=reiview_choice, null=True, blank=True)
+    text = models.TextField(max_length=2048, null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.food} review'

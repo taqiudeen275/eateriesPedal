@@ -2,6 +2,8 @@
 :root{
     --pl-color : #FAE800;
     --pr-color : #F8C822;
+    --danger-color: #c93712;
+    --success-color: #0fb400;
     --hpr-color: #c9a112;
     --dk-color: rgb(24, 29, 1);
     --gray-color: #686868;
@@ -913,7 +915,32 @@ nav a{
         background-color:rgba(9, 8, 8, 0.507);
 
     }
-
+    .dModal-bg{
+        width: 95%;
+        height: 20vh;
+        background-color: var(--white);
+       border-radius: 10px;
+        z-index: 5;
+        position: absolute;
+        right: 10px;
+        transform: scale(0);
+        opacity: 0;
+        transition: 0.5s;
+    }
+    .dbtn-yes{
+        background-color: var(--danger-color);
+        padding: 10px 30px;
+        border: none;
+        font-size: 14px;
+        
+    }
+    .dbtn-no{
+        background-color: var(--success-color);
+        padding: 10px 30px;
+        border: none;
+        font-size: 14px;
+        
+    }
     .hero{
         
         background-color:rgba(9, 8, 8, 0.507);

@@ -6,12 +6,13 @@
       {% if request.user.is_authenticated %}
       <a href="#" class="btn-link-d nav-link"><i class="fa fa-user"></i> {{request.user}}</a>
       {% if user.vendor.exists %}
+      <a href="{% url 'vendor:profile' %}" class="btn-link-d nav-link"><i class="fa far far fa-user"></i> Profile</a>
       <a href="{% url 'vendor:foodAdd' %}" class="btn-link-d nav-link"><i class="fa far fa-plus"></i> Food</a>
       {% endif %}
       <a href="{% url 'account:logout' %}" class="btn-link-d nav-link"><i class="fa fas fa-sign-out-alt"></i> Logut</a>
       {% else %}
       <a href="{% url 'account:login' %}" class="btn-link-d nav-link"><i class="fa fas fa-sign-in-alt"></i> Login</a>
-      <a href="{% url 'account:register' %}" class="btn-link-d nav-link"><i class="fa far fa-registered"></i> Signup</a>
+      <a href="{% url 'account:register' %}" class="btn-link-d nav-link"><i class="fa far fas fa-user-plus"></i> Signup</a>
       {% endif %}
       
     </nav>

@@ -18,6 +18,18 @@
                     <div class="f-14 text-light">{{food.description}}</div>
                     <h1 class="h1-pr f-16">{{food.offer}}</h1>
                     <h1 class="h1-pr f-16">{{food.delivery_time}}</h1>
+                    {% if foodowner %}
+                    <a href="{% url 'vendor:foodEdit' food.id %}" class="btn-3-round">Edit Food</a>
+                    <button class="btn dModal-toggle">Delete</button>
+                        <div class="dModal-bg flex-column-sb p-20">
+                          <h1 class="text-gray f-14 text-center"> Are you sure you want to delete {{food}}</h1>
+                          <form action="{% url 'vendor:foodDelete' food.id %}" class="flex-center gap-20" method="POST">{% csrf_token %}
+                            <input type="submit" value="Yes" class="dbtn-yes">
+                            <a class="dbtn-no dModalClose">No</a>
+                          </form>
+                        </div>
+                      
+                    {% endif %}
                 </div>
             </div>
         </div>
