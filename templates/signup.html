@@ -1,0 +1,20 @@
+{% extends 'base-transparent.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="login  flex-center">
+    <div class="card-200-glass m-50">
+        <h1 class="h1-pr m-10 text-center mb-30">REGISTER</h1>
+       
+            <form action="{% url 'account:register' %}" method="POST"  class="textbox flex-center-column mb-30" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="h1-pr"> {{ form.non_field_errors }}</div>
+                {{form.as_p}}
+                <button type="submit" class="btn-3-round f-18 uppercase">Signup</button>
+                <p class="m-10 f-14 text-light">Don't have an account? <a href="{% url 'account:login' %}" class="text-pr">Login</a></p>
+            </form>
+    
+
+    </div>
+</div>
+{% endblock %}

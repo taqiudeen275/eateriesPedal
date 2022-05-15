@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+{% include 'head.html' %}
+<body>
+    <div class="body">
+    {% include 'loading.html' %}
+    {% include 'nav-transparent.html' %}
+
+        {% block content %}
+        
+        {% endblock %}
+        {% include 'footer-transparent.html' %}
+    </div>
+
+</body>
+{% include 'script.html' %}
+
+</html>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="login  flex-center">
+    <div class="card-200 m-30">
+        <h1 class="h1-pr m-10 text-center mb-30">Add Food Form</h1>
+        
+            <form enctype="multipart/form-data" action="{% url 'vendor:foodAdd' %}" method="POST" class="textbox flex-center-column mb-30">
+                {% csrf_token %}
+                {{ form.non_field_errors }}
+                {{form.as_p}}
+                <button type="submit" class="btn-3-round f-18">Save</button>
+            </form>
+
+    </div>
+</div>
+{% endblock %}

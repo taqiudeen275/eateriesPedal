@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+        {% if results %}
+        <div class="flex-wrap">
+        {% for food in results %}
+
+         <div class="card-150 mb-10">
+            <div class="card-150-img-container">
+                <img src="{{food.photo.url}}" alt="" class="card-150-img">
+            </div>
+            <div class="card150-offer">{{food.offer}}</div>
+            <div class="card150-content">
+                <h1 class="card150-title">{{food.name}} </h1>
+                <h1 class="card150-price">GH₵ {{food.price}} </h1>
+                <h1 class="card150-rating"> <i class="fa fa-star text-pr"></i> {{food.ratings}} </h1>
+                <h1 class="card150-time"><i class="fa fa-clock text-pr"></i> {{food.delivery_time}}</h1>
+     
+             </div>
+     
+            <a href="{% url 'home:food' food.food_url %}" class="card150-btn-lb">more</a>
+            <a href="cart.html" class="card150-btn-rb">add to cart</a>
+        </div>
+        {% endfor %}  
+         </div>
+        {% else %} 
+        <h1 class="h1-pr uppercase mb-40 text-center">No search resust for '{{q}}'</h1>
+
+         {% endif %}  
+    
+
+{% endblock %}

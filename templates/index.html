@@ -1,0 +1,39 @@
+{% extends 'base-transparent.html' %} 
+{% load static %} 
+{% block content %}
+
+  <div class="hero">
+      <h1 class="hero-h1">PLACE YOUR ORDER NOW</h1>
+      <h2 class="hero-h2">Eateries pedal is an online 
+          food store which links you to your
+           favouirite resrtaurant</h2>
+           <a href="{% url 'home:menu' %}" class="btn">Explore</a>
+  </div>
+  <div class="service">
+      <h1 class="h1-pr m-10">Work with us</h1>
+      <div class="flex-column-sb h100 gap-20">
+          <div class="card-200">
+              <div class="card200-icon-container">
+                  <i class="fa fa-bowl-rice card200-icon"></i>
+              </div>
+              <div class="card200-content p-10">
+                  <p>Are you a food seller or a restaurant render who wish to expand your business online?
+                      Well, Eateries pedal is here to help you</p>
+              </div>
+          </div>
+          <div class="card-200">
+              <div class="card200-icon-container">
+                  <i class="fa fa-bowl-food card200-icon"></i>
+              </div>
+              <div class="card200-content p-10">
+                  <p>Are you hungry but busy to get your self a meal? Eateries Pedal is here for you. Order food at your comfort zone using eateries pedal.</p>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="testimonials">
+      <h1 class="h1-pr text-center p-20 blur">Testimonials</h1>
+      <p class="h100 flex-center text-light blur1">No testimonial available at the moment</p>
+  </div>
+  
+  {% endblock %}

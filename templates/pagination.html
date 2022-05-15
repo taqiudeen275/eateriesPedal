@@ -1,0 +1,19 @@
+    <div class="flex gap-10">
+        {% if foods.has_previous %}
+           <a href="?{{rpv}}={{foods.previous_page_number}}" class="btn bg-pl" aria-label="Previous">
+                 <span aria-hidden="true">
+                    <span class="fa far fa-arrow-alt-circle-left">
+                </span>
+            </span></a>
+        {% endif %}
+         <a href="?{{rpv}}={{foods.number}}" class="btn-3-round">{{foods.number}}</a>
+        {% if foods.has_next %}
+            <a href="?{{rpv}}={{foods.next_page_number}}" class="btn bg-pl" aria-label="Next">
+                <span aria-hidden="true">
+                    <span class="fa far fa-arrow-alt-circle-right">
+                </span>
+            </span></a>
+        {% endif %}
+        </div>
+
+

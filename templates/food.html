@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+      <div class="profile-card">
+        <img src="{{food.photo.url}}" class="profile-card-bg-img">
+        <div class="profile-card-content">
+            <div class="profile-item ">
+            <img src="{{food.photo.url}}" class="profile-pic">
+              <div class="mi-20 flex-column-sb">
+                  <h1 class="text-light">{{food.name}}</h1>
+              <h2 class="text-light f-14"> GH₵ {{ food.price}}</h2>
+              <h2 class="text-pr f-14"> <i class="fa fa-star"></i> {{food.ratings}}</h2>
+              <a href="cart.html" class="btn">Buy Now</a>
+              </div>
+            </div>
+            <div class="profile-item">
+                <div class="mb-30 text-space all-m-bottom-10">
+                    <div class="f-14 text-light">{{food.description}}</div>
+                    <h1 class="h1-pr f-16">{{food.offer}}</h1>
+                    <h1 class="h1-pr f-16">{{food.delivery_time}}</h1>
+                </div>
+            </div>
+        </div>
+        <div class="profile-card-content-sm-bottom ">
+            <a href="{% url 'home:vendorProfile' food.vendor.id %}"><img src="{{food.vendor.photo.url}}" class="profile-pic-rounded-sm"></a>
+        </div>
+    </div>
+    <div class="m-30">
+      <h1 class="text-center text-pr f-20">Rate Our Food</h1>
+      <div class="form flex-center mb-30">
+        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
+        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
+        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
+        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
+        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
+      </div>
+    </div>
+    <div class="m-30">
+      <h1 class="text-center text-pr f-20 uppercase">Other Foods by vendor</h1>
+    </div>
+      <div class="flex-wrap">
+      {% for vfood in foods %}
+      <div class="card-150 mb-10">
+        <div class="card-150-img-container">
+            <img src="{{vfood.photo.url}}" alt="" class="card-150-img">
+        </div>
+        <div class="card150-offer">{{vfood.offer}}</div>
+        <div class="card150-content">
+            <h1 class="card150-title">{{vfood.name}} </h1>
+            <h1 class="card150-price">GH₵ {{vfood.price}} </h1>
+            <h1 class="card150-rating"> <i class="fa fa-star text-pr"></i> {{vfood.ratings}} </h1>
+            <h1 class="card150-time"><i class="fa fa-clock text-pr"></i> {{vfood.delivery_time}}</h1>
+ 
+         </div>
+ 
+        <a href="{% url 'home:food' vfood.food_url %}" class="card150-btn-lb">more</a>
+        <a href="cart.html" class="card150-btn-rb">add to cart</a>
+    </div>
+      {% endfor %}
+    </div>
+
+    {% endblock content %}

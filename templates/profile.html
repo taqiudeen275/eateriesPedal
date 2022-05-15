@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="profile-card">
+        <img src="{{vendor.photo.url}}" class="profile-card-bg-img">
+        <div class="profile-card-content">
+            <div class="flex-center-column gap-20">
+                <img src="{{ vendor.photo.url }}" class="profile-pic-rounded shadow-pr">
+                <h1 class="text-light f-28 uppercase text-space">{{vendor}}</h1>
+                <h1 class="text-light f-18 uppercase text-space">{{vendor.location}}</h1>
+                <h1 class="text-light f-18 uppercase text-space">{{vendor.contact}}</h1>
+                <h1 class="text-light f-18 uppercase text-space">{{vendor.contact_2}}</h1>
+                <div class="flex-center-column text-pr">
+                    <div>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </div>
+                    <div class="f-16 text-light">3.3</div>
+                </div>
+                <div class="f-14 text-light text-space mi-20">
+                    {{vendor.description}}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

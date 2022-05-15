@@ -1,0 +1,22 @@
+<footer class="bg-pr shadow-pr">
+    <div class="footer-nav">
+
+        <div class="handles">
+            <h2 class="h1-l">Social Media Handle</h2>
+            <a href="#" class="btn-link-l"><i class="fab fa-facebook"></i> facebook </a>
+        </div>
+        <div class="links">
+            <h2 class="h1-l">Useful Links</h2>
+            {% if request.user.is_authenticated %}
+            <a href="#" class="btn-link-l"><i class="fa fa-user"></i> {{request.user}}</a>
+
+            {% else %}
+            <a href="{% url 'account:login' %}" class="btn-link-l"><i class="fa fa-arrow-left"></i> Login</a>
+            <a href="{% url 'account:register' %}" class="btn-link-l"><i class="fa fa-arrow-left"></i> Signup</a>
+            {% endif %}
+            <a href="menu.html" class="btn-link-l"><i class="fa fa-arrow-left"></i> Menu</a>
+            
+        </div>
+    </div>
+    <div class="dev">PTC X ATS © 2022 </div>
+  </footer>

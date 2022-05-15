@@ -1,0 +1,19 @@
+{% extends 'base-transparent.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="login  flex-center">
+    <div class="card-200-glass m-50">
+        <h1 class="h1-pr m-10 text-center mb-30">LOGIN</h1>
+        <div class="textbox flex-center-column mb-30">
+            <form action="{% url 'account:login' %}" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn-3-round f-18">LOGIN</button>
+                <p class="m-10 f-14 text-light">Don't have an account? <a href="{% url 'account:register' %}" class="text-pr">Signup</a></p>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

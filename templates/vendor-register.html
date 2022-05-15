@@ -1,0 +1,18 @@
+{% extends 'base-transparent.html' %} 
+{% load static %} 
+{% block content %}
+
+<div class="login  flex-center">
+    <div class="card-200-glass m-50">
+        <h1 class="h1-pr m-10 text-center mb-30">Vendor Form</h1>
+        <div class="textbox flex-center-column mb-30">
+            <form enctype="multipart/form-data" action="{% url 'vendor:register' %}" method="POST">
+                {% csrf_token %}
+                {{form.as_p}}
+                <button type="submit" class="btn-3-round f-18">Register</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

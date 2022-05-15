@@ -1,0 +1,48 @@
+{% extends 'base-transparent.html' %} 
+{% load static %} 
+{% block content %}
+
+    <div class="flex-center">
+        <div class="card-200-glass m-50 p-20">
+            <h1 class="h1-pr m-10 text-center mb-30">About</h1>
+            <h1 class="h1-pr f-18 text-space">Eateries <span class="text-light">Pedal</span> </h1> 
+            <p class="text-light">
+                is an online food delivery site.
+                Created to help both customers to reach out to their favourite food vendor online.
+                Food vendors who want to expand their business can online can use Eateries Pedal for that. All you need is to sign up and upload your menu online. You will be notified when someone order food
+            </p>
+
+        </div>
+    </div>
+    <div class="flex-center-column">
+        <h1 class="h1-l text-center blur">About Developers</h1>
+        <div class="card-200-glass m-30 p-20">
+            <h1 class="h1-pr f-18 text-space">ATS <span class="text-light">Tech</span> </h1> 
+            <img src="{% static 'Assets/ats.png' %}" class="about-img-responsive">
+            <h1 class="h1-pr f-14 text-space">Abdulai Taqiudeen Suhuyini</h1>
+            <p class="text-light">
+                Web designer <br>
+                Graphic designer <br>
+                Pythoneer <br>
+                Web developer (Full-Stack developer) <br>
+                <u class="text-pr">Contact</u> <br>
+                <i class="fa fa-mail-bulk"> </i> ats@eateriespedal.xyz <br>
+                <i class="fab fa-whatsapp"> </i> +233 20 609 5024 
+            </p>
+
+        </div>
+        <div class="card-200-glass m-30 p-20">
+            <h1 class="h1-pr f-18 text-space">P<span class="text-light">TC</span> </h1> 
+            <img src="{% static 'Assets/ptc.png' %}" class="about-img-responsive">
+            <h1 class="h1-pr f-14 text-space">Abdul Nasir Mohammed Hafiz</h1>
+            <p class="text-light">
+                Pythoneer <br>
+                Web developer <br>
+                <u class="text-pr">Contact</u> <br>
+                <i class="fa fa-mail-bulk"> </i> ptc@eateriespedal.xyz <br>
+                <i class="fab fa-whatsapp"> </i> +223 50 901 7573 
+            </p>
+
+        </div>
+    </div>
+    {% endblock  %}
