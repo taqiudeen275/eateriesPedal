@@ -1,10 +1,13 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import redirect, render,get_object_or_404
 from vendor.models import Food,VendorAcount
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.db.models import Count,Q
+from django.db.models import Q
+from vendor.forms import FoodReviewForm
 
 
 def indexView(request):
+    if request.user.is_authenticated:
+        return redirect('home:menu')
     context= {
         'title': "Eateries Pedal"
      }
@@ -36,12 +39,20 @@ def menuView(request):
 def foodView(request, food_url):
     food = get_object_or_404(Food, food_url=food_url)
     foods = Food.objects.filter(vendor=food.vendor)
+    reviewForm = FoodReviewForm(request.POST or None)
+    if request.method == "POST":
+        if reviewForm.is_valid():
+            review = reviewForm.save(commit=False)
+            review.food = food
+            review.user = request.user
+            review.save()
     user = request.user
    
     context={
         'title': food,
         'food': food,
         'foods': foods,
+        'reviewForm': reviewForm,
         }
     if user.is_authenticated:
         if user.vendor.exists():

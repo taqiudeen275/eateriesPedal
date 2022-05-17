@@ -55,4 +55,4 @@ class FoodReview(models.Model):
 
 class FoodAverageRatings(models.Model):
     food = models.ForeignKey(Food, on_delete=models.CASCADE, related_name="averageRating")
-    rate = models.PositiveSmallIntegerField()
+    rate = models.PositiveSmallIntegerField(default=0)

@@ -2,6 +2,7 @@ from .forms import *
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from accounts.models import User
+from .signals import food_urls_generator
 
 @login_required
 def vendorRegister(request):
@@ -11,7 +12,6 @@ def vendorRegister(request):
         return redirect('home:index')
     if request.method == "POST":
         if vform.is_valid():
-            print(dir(vform))
             form = vform.save(commit=False)
             form.user = request.user
             form.save()
@@ -71,6 +71,8 @@ def foodaddView(request):
         if form.is_valid():
             iform =form.save(commit=False)
             iform.vendor = get_object_or_404(VendorAcount, user=request.user)
+            f_url = food_urls_generator(iform.name)
+            iform.food_url = f_url
             iform.save()
             return redirect('home:menu')
     template_name = 'foodAdd.html'

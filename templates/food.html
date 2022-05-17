@@ -37,16 +37,16 @@
             <a href="{% url 'home:vendorProfile' food.vendor.id %}"><img src="{{food.vendor.photo.url}}" class="profile-pic-rounded-sm"></a>
         </div>
     </div>
+    {% if user.is_authenticated %}
     <div class="m-30">
       <h1 class="text-center text-pr f-20">Rate Our Food</h1>
-      <div class="form flex-center mb-30">
-        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
-        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
-        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
-        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
-        <button class="text-gray borderless f-20"><i class="fa fa-star"></i></button>
-      </div>
-    </div>
+      <form class="form mb-30 flex-center-column" action="{% url 'home:food' food.food_url %}" method="POST">
+        {% csrf_token %}
+        {{reviewForm.as_p}}
+        <input type="submit" class="btn">
+      </form>
+    </div>  
+    {% endif %}
     <div class="m-30">
       <h1 class="text-center text-pr f-20 uppercase">Other Foods by vendor</h1>
     </div>
