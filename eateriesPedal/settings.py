@@ -1,12 +1,9 @@
 from pathlib import Path
-import environ
-
-env = environ.Env()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = env("SECRET_KEY")
+SECRET_KEY = 'django-insecure-6+l(skr#!#&bwf9i-#$j#%5t)y&s-)h#m0k%u&)p&oue8pg8k7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -28,6 +25,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
     'vendor.apps.VendorConfig',
+    'cart.apps.CartConfig',
     'paystack',
 ]
 
@@ -131,5 +129,5 @@ LOGIN_URL = '/account/login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# PAYSTACK_PUBLIC_KEY=os.environ.get('name-of-var')
-# PAYSTACK_PRIVATE_KEY=os.environ.get('name-of-var')
+PAYSTACK_PUBLIC_KEY= 'pk_test_843d55f30acac72ebb1686db601c59b9838c6ee2'
+PAYSTACK_PRIVATE_KEY= 'sk_test_f4d659393a5fb38a7fd3c063a275356ffd96468f'

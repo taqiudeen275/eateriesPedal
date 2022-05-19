@@ -1,5 +1,5 @@
 from itertools import count
-from django.db.models.signals import pre_save,post_save
+from django.db.models.signals import post_save
 from django.dispatch import receiver
 from .models import Food,FoodAverageRatings,FoodReview
 import random
@@ -13,10 +13,11 @@ def food_urls_generator(foodname):
     urls_string = f"{foodname}-{result_str}"
     return urls_string
 
-@receiver(pre_save, sender=Food)
-def food_url_handler(sender,instance,*args, **kwargs):
-    if instance:
-        FoodAverageRatings.objects.get_or_create(food=instance)
+@receiver(post_save, sender=Food)
+def food_url_handler(sender,instance,created, *args, **kwargs):
+    if created:
+        rfood = FoodAverageRatings.objects.create(food=instance)
+        rfood.save()
 
 def averageratingsCalc(list_of_rates):
     total_rate = 0

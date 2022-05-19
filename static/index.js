@@ -27,3 +27,4 @@ document.querySelector('.dModalClose').addEventListener('click', ()=>{
     modalBg.style.opacity = 0
     modalBg.style.transform = 'scale(0)'
 })
+

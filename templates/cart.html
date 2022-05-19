@@ -1,105 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="css/all.min.css" />
-    <link rel="stylesheet" href="css/brands.css" />
-</head>
-<body>
-    <div class="nav-bar fixed-top shadow">
-        <a href="index.html"><h2 class="logo-d">Eateries</h2></a>
-        <nav class="visible">
-          <a href="menu.html" class="btn-link-d nav-link">Menu</a>
-          <a href="login.html" class="btn-link-d nav-link">Login</a>
-          <a href="signup.html" class="btn-link-d nav-link">Signup</a>
-          <a href="about.html" class="btn-link-d nav-link">About</a>
-        </nav>
-        <button class="menu-toggle"><i class="fa fa-bars"></i></button>
-      </div>
-    
+{% extends 'notLbase.html' %}
+{% load static %}
+{% block content %}
     <div class="cart flex-center mb-30">
         <div class="card-200-c m-10">
             <h1 class="h1-pr m-10 text-center mb-30">CART <i class="fa fa-shopping-cart"></i></h1>
             <div class="order-list flex-column-base">
+                {% for food in cart_items.foodcart.all %}
                 <div class="fc-m">
-                    <img src="assets/f5.png " class="c-img">
+                    <img src="{{food.food.photo.url}}" class="c-img">
                     <div class="content">
-                        <h3>Bread</h3>
-                        <p>GH₵ 20</p>
+                        <h3>{{food.food.name}}</h3>
+                        <p>GH₵ {{food.food.price}}</p>
+                        <p class="mi-10 text-gray">{{food.quantity}}</p>
                        <div class="quantity flex-center-column">
                             <p>Quantiy</p>
-                            <div class="flex">
-                                <a class="btn-pl ">-</a>
-                                <p class="mi-10 text-gray">1</p>
-                                <a class="btn-pl">+</a>
+                            <div class="flex gap-10">
+                                <a class="foodedit btn-pl" data-food="{{food.food.id}}" data-action="add">+</a> 
+                                <a class="foodedit btn-pl" data-food="{{food.food.id}}" data-action="sub">-</a> 
                             </div>
                         </div>
-    
                     </div>
                 </div>
-                <div class="fc-m">
-                    <img src="assets/f2.png " class="c-img">
-                    <div class="content">
-                        <h3>Pizza</h3>
-                        <p>GH₵ 15</p>
-                        <div class="quantity flex-center-column">
-                            <p>Quantiy</p>
-                            <div class="flex">
-                                <a class="btn-pl ">-</a>
-                                <p class="mi-10 text-gray">4</p>
-                                <a class="btn-pl">+</a>
-                            </div>
-                        </div>
-                        
-    
-                    </div>
-                </div>
-                <div class="fc-m">
-                    <img src="assets/f4.png " class="c-img">
-                    <div class="content">
-                        <h3>Cake</h3>
-                        <p>GH₵ 10</p>
-                        <div class="quantity flex-center-column">
-                            <p>Quantiy</p>
-                            <div class="flex">
-                                <a class="btn-pl ">-</a>
-                                <p class="mi-10 text-gray">1</p>
-                                <a class="btn-pl">+</a>
-                            </div>
-                        </div>
-    
-                    </div>
-                </div>
+                {% endfor %}
                
             </div>
             <div class="flex-row-sb t-pos-bottom">
                 <h4>Total :</h4>
-                <p>GH₵ 90</p>
+                <p>GH₵ {{cart_items.total}}</p>
             </div>
             <button type="submit" class="btn m-20 pos-bottom shadow">Pay Now</button>
         </div>
     </div>
-    <footer class="bg-pr shadow">
-        <div class="footer-nav">
-  
-            <div class="handles">
-                <h2 class="h1-l">Social Media Handle</h2>
-                <a href="#" class="btn-link-l"><i class="fab fa-facebook"></i> facebook </a>
-            </div>
-            <div class="links">
-                <h2 class="h1-l">Useful Links</h2>
-                <a href="login.html" class="btn-link-l"><i class="fa fa-arrow-left"></i> Login</a>
-                <a href="signup.html" class="btn-link-l"><i class="fa fa-arrow-left"></i> Signup</a>
-                <a href="menu.html" class="btn-link-l"><i class="fa fa-arrow-left"></i> Menu</a>
-                
-            </div>
-        </div>
-        <div class="dev">PTC X ATS © 2022 </div>
-      </footer>
-</body>
-<script src="index.js"></script>
-</html>
+
+    {% endblock content %}
+{% block myscript %}
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+let foodEditBtn = document.getElementsByClassName('foodedit')
+
+for (let i=0; i < foodEditBtn.length; i++){
+    foodEditBtn[i].addEventListener('click', function(){
+        let product = this.dataset.food
+        let action = this.dataset.action
+        editCart(product, action)
+    })
+}
+function editCart(product, action){
+    var url = "{% url 'cart:cartAdd' %}"
+
+    fetch(url, {
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body:JSON.stringify({'product':product,'action':action})
+    })
+    .then((response)=>{
+        return response.json()
+    })
+    .then((data)=>{
+        console.log(data)
+        location.reload()
+
+    })
+}
+</script>
+{% endblock%}

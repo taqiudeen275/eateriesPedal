@@ -32,16 +32,16 @@ class Food(models.Model):
         return self.name
 
 reiview_choice = [
-    (1, 'Trash'),
-    (2, 'Horible'),
-    (3, 'Terrible'),
-    (4, 'Manageable'),
-    (5, 'Good'),
-    (6, 'Better'),
-    (7, 'Tasty'),
-    (8, 'Yummy'),
-    (9, 'Awesome'),
-    (10, 'Superb'),
+    (1, '1 Trash'),
+    (2, '2 Horible'),
+    (3, '3 Terrible'),
+    (4, '4 Manageable'),
+    (5, '5 Good'),
+    (6, '6 Better'),
+    (7, '7 Tasty'),
+    (8, '8 Yummy'),
+    (9, '9 Awesome'),
+    (10, '10 Superb'),
 ]
 
 class FoodReview(models.Model):

@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render,get_object_or_404
-from vendor.models import Food,VendorAcount
+from vendor.models import Food,VendorAcount,FoodReview
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.db.models import Q
 from vendor.forms import FoodReviewForm
@@ -40,6 +40,7 @@ def foodView(request, food_url):
     food = get_object_or_404(Food, food_url=food_url)
     foods = Food.objects.filter(vendor=food.vendor)
     reviewForm = FoodReviewForm(request.POST or None)
+    food_review = FoodReview.objects.filter(food=food.id)
     if request.method == "POST":
         if reviewForm.is_valid():
             review = reviewForm.save(commit=False)
@@ -53,6 +54,7 @@ def foodView(request, food_url):
         'food': food,
         'foods': foods,
         'reviewForm': reviewForm,
+        'ratings': food_review,
         }
     if user.is_authenticated:
         if user.vendor.exists():

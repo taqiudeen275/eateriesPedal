@@ -10,7 +10,7 @@
                   <h1 class="text-light">{{food.name}}</h1>
               <h2 class="text-light f-14"> GH₵ {{ food.price}}</h2>
               <h2 class="text-pr f-14"> <i class="fa fa-star"></i> {{food.ratings}}</h2>
-              <a href="cart.html" class="btn">Buy Now</a>
+              <a class="btn foodedit" data-food="{{food.id}}" data-action="add">Buy Now</a>
               </div>
             </div>
             <div class="profile-item">
@@ -47,6 +47,20 @@
       </form>
     </div>  
     {% endif %}
+    {% if ratings %}
+    <h1 class="h1-pr text-center">Reviews</h1>
+    <div class="review">
+      {% for rate in ratings %}
+      <p>
+        <div class="text-gray">
+         <i class="fa fa-user"></i> <span>{{rate.user}}</span>
+        </div>
+        <h1 class="f-16 text-pr"><i class="fa fa-star"></i> {{rate.rate}}</h1>
+        {{rate.text }}
+      </p>
+      {% endfor %}
+      {% endif %}
+    </div>
     <div class="m-30">
       <h1 class="text-center text-pr f-20 uppercase">Other Foods by vendor</h1>
     </div>
@@ -66,9 +80,66 @@
          </div>
  
         <a href="{% url 'home:food' vfood.food_url %}" class="card150-btn-lb">more</a>
-        <a href="cart.html" class="card150-btn-rb">add to cart</a>
+        <a data-food="{{vfood.id}}" data-action="add" class="card150-btn-rb ofoodedit">add to cart</a>
     </div>
       {% endfor %}
     </div>
 
     {% endblock content %}
+    {% block myscript %}
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+let ofoodEditBtn = document.getElementsByClassName('ofoodedit')
+
+for (let i=0; i < ofoodEditBtn.length; i++){
+    ofoodEditBtn[i].addEventListener('click', function(){
+        let product = this.dataset.food
+        let action = this.dataset.action
+        editCart(product, action)
+    })
+}
+
+let foodEditBtn = document.querySelector('.foodedit')
+
+foodEditBtn.addEventListener('click', function(){
+        let product = this.dataset.food
+        let action = this.dataset.action
+        editCart(product, action)
+    })
+function editCart(product, action){
+    var url = "{% url 'cart:cartAdd' %}"
+
+    fetch(url, {
+        method: "POST",
+        headers:{
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body:JSON.stringify({'product':product,'action':action})
+    })
+    .then((response)=>{
+        return response.json()
+    })
+    .then((data)=>{
+        console.log(data)
+        location.reload()
+    })
+}
+</script>
+{% endblock%}

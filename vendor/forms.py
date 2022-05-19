@@ -148,8 +148,8 @@ class FoodReviewForm(forms.ModelForm):
      rate = forms.ChoiceField(label=False,required=False, choices=reiview_choice, widget=forms.Select(attrs={
       'class':'form-item mb-10 ',  
       }))
-     text = forms.CharField(label=False,required=False,widget=forms.TextInput(attrs={
-      'class':'form-item mb-10 ',
+     text = forms.CharField(label=False,required=False,widget=forms.Textarea(attrs={
+      'class':'form-item-ta mb-10 ',
       'placeholder': 'Comment'
       
       }))
